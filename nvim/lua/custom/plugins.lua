@@ -1,5 +1,33 @@
 local plugins ={
   {
+    'nvim-neorg/neorg',
+    ft = 'norg', -- lazy load on filetype
+    cmd = 'Neorg', -- lazy load on command, allows you to autocomplete :Neorg regardless of whether it's loaded yet
+    --  (you could also just remove both lazy loading things)
+    priority = 30, -- treesitter is on default priority of 50, neorg should load after it.
+    config = function()
+      require('neorg').setup {
+        load = {
+        ["core.defaults"] = {}, -- Loads default behaviour
+        ["core.concealer"] = {}, -- Adds pretty icons to your documents
+    ["core.keybinds"] = {
+    config = {        
+              default_keybinds = true,
+            }
+          },
+        ["core.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              dev = "~/notes/dev",
+              study = "~/notes/study",
+              stuff = "~/notes/stuff",
+            },
+            default_workspace= "stuff",
+          },
+    }}}
+    end
+  },
+  {
     "christoomey/vim-tmux-navigator",
     lazy=false,
   },
