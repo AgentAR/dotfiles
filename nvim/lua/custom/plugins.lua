@@ -109,7 +109,6 @@ local plugins ={
         "codelldb",
         "rust-analyzer",
         "gopls",
-        "jdtls"
       }
     }
   },
@@ -126,6 +125,34 @@ local plugins ={
     config=function ()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
+    end
+  },
+  {
+    "windwp/nvim-ts-autotag",
+    ft={
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+    },
+    config= function ()
+      require("nvim-ts-autotag").setup()
+    end
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts= function()
+      opts=require "plugins.configs.treesitter"
+      opts.ensure_installed = {
+        "lua",
+        "javascript",
+        "typescript",
+        "tsx",
+        "go",
+        "rust",
+
+      }
+      return opts
     end
   },
 }
